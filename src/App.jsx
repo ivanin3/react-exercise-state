@@ -4,19 +4,21 @@ export default function App() {
   const [tasks, setTasks] = useState([]);
   const [newTask, setNewTask] = useState('');
 
+  const addTask = () => {
+    if (newTask !== '') {
+      setTasks([...tasks, newTask]);
+      setNewTask('');
+    }
+  }     
+
   return (
     <div>
       <input
         type="text"
         value={newTask}
         onChange={(e) => setNewTask(e.target.value)}
-        onKeyDown={(e) => {
-          if (e.key === 'Enter' && newTask !== '') {
-            setTasks([...tasks, newTask]);
-            setNewTask('');
-          }
-        }}
       />
+      <button onClick={addTask}>Añadir Tarea</button>
       <ul>
         {tasks.map((task, index) => (
           <li key={index}>{task}</li>
